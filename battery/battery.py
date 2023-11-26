@@ -4,8 +4,9 @@ from datetime import datetime
 
 class Battery(ABC):
     """ This is the base class for all battery-related classes """
-    def __init__(self, last_service_date):
+    def __init__(self, current_date, last_service_date):
         self.last_service_date = last_service_date
+        self.current_date = current_date
 
     @abstractmethod
     def needs_service(self):
@@ -29,5 +30,5 @@ class Battery(ABC):
         if the service threshold date is less than the current date
         """
         service_threshold_date = self.calculate_service_threshold_date(threshold_years)
-        current_date = datetime.today().date()
-        return service_threshold_date < current_date
+        # current_date = datetime.today().date()
+        return service_threshold_date < self.current_date
